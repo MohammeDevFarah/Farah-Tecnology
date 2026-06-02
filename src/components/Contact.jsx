@@ -124,11 +124,20 @@ export default function Contact() {
                     <label>Serviço desejado *</label>
                     <select className="f-input" value={form.service} onChange={e => setField('service', e.target.value)}>
                       <option value="">Selecione...</option>
-                      <option>Desenvolvimento Web</option>
-                      <option>Aplicação Web</option>
-                      <option>Social Media</option>
-                      <option>Identidade Digital</option>
-                      <option>Pacote Completo</option>
+                      <optgroup label="── Planos ──">
+                        <option value="Plano Essencial — Presença Online (R$ 1.997)">Essencial — Presença Online · R$ 1.997</option>
+                        <option value="Plano Profissional — Crescimento Digital (R$ 3.997)">Profissional — Crescimento Digital · R$ 3.997</option>
+                        <option value="Plano Enterprise — Solução Completa">Enterprise — Solução Completa · sob consulta</option>
+                      </optgroup>
+                      <optgroup label="── Serviços avulsos ──">
+                        <option value="Desenvolvimento Web">Desenvolvimento Web</option>
+                        <option value="Aplicação Web">Aplicação Web</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Identidade Digital">Identidade Digital</option>
+                      </optgroup>
+                      <optgroup label="── Outro ──">
+                        <option value="Tenho dúvidas, quero conversar">Tenho dúvidas, quero conversar</option>
+                      </optgroup>
                     </select>
                     {errors.service && <span className="form-err">{errors.service}</span>}
                   </div>

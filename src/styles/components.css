@@ -441,6 +441,12 @@ select.f-input {
   background-repeat: no-repeat; background-position: right 0.875rem center;
   padding-right: 2.5rem; cursor: pointer;
 }
+/* Garante legibilidade no dropdown nativo do OS */
+select.f-input option,
+select.f-input optgroup {
+  background-color: #0E0E24;
+  color: #FFFFFF;
+}
 .form-err { font-size: 0.75rem; color: var(--red); margin-top: 0.25rem; }
 
 .form-success { text-align: center; padding: 1.5rem 0; }
