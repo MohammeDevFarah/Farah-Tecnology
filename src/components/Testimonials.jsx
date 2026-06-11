@@ -1,42 +1,48 @@
 const testimonials = [
-  { name:'Carlos Mendonça',  role:'CEO — Mendonça Cosméticos',         av:'CM', text:'"A FarahTechnology transformou completamente nossa presença digital. Em 3 meses após o lançamento do novo site, nossas consultas online aumentaram 240%. O nível de atenção ao projeto foi impressionante."' },
-  { name:'Ana Paula Silva',  role:'Proprietária — Clínica Estética Rosaté', av:'AS', text:'"Finalmente encontrei um parceiro de tecnologia que entende de negócio. Não me entregaram só um site bonito — me entregaram um sistema que agenda, confirma e reduz faltas. Resultado imediato."' },
-  { name:'Roberto Ferreira', role:'Empresário — Rede Grill Urbano',    av:'RF', text:'"Contratei para criar o site e fiquei com eles para o social media também. Em 6 meses, nossa conta no Instagram saiu de 1.200 para 18.000 seguidores com engajamento e clientes reais."' },
-  { name:'Juliana Costa',    role:'Gerente de Marketing — TechVantage',av:'JC', text:'"O sistema de gestão que desenvolveram para nós reduziu nosso tempo de relatórios em 70%. A equipe foi proativa, transparente e entregou antes do prazo. Já indicamos para três parceiros."' },
-  { name:'Marcelo Augusto',  role:'Fundador — StartHub Incubadora',    av:'MA', text:'"Precisávamos de uma plataforma robusta para conectar startups e investidores. A FarahTechnology entregou em 8 semanas algo que cotamos em outros lugares por o dobro do prazo."' },
-  { name:'Fernanda Lima',    role:'Diretora — FisioCorp Clínicas',     av:'FL', text:'"Gestão de redes sociais de alta qualidade. Nosso conteúdo nunca foi tão profissional e os pacientes chegam nos citando posts do Instagram. Claramente sentiram a diferença."' },
+  {
+    name: 'Ana Paula Silva',
+    role: 'Diretora, Clínica Rosaté',
+    initials: 'AS',
+    text: 'A equipe entendeu nosso negócio antes de falar de layout. O novo site deixou a clínica mais profissional e trouxe pacientes mais preparados para fechar.',
+  },
+  {
+    name: 'Roberto Ferreira',
+    role: 'Sócio, Grill Urbano',
+    initials: 'RF',
+    text: 'Contratamos o site e mantivemos social media. A comunicação ficou consistente e começamos a receber contatos citando conteúdos das redes.',
+  },
+  {
+    name: 'Juliana Costa',
+    role: 'Marketing, TechVantage',
+    initials: 'JC',
+    text: 'O sistema interno reduziu horas de relatório manual. A entrega foi transparente, com checkpoints claros e ajustes rápidos.',
+  },
 ]
 
 export default function Testimonials() {
   return (
-    <section id="depoimentos">
+    <section className="testimonials" id="depoimentos">
       <div className="container">
-        <div className="test-header reveal">
-          <span className="section-tag">Depoimentos</span>
-          <h2 className="h-lg">
-            O que nossos clientes{' '}
-            <span className="text-gradient">dizem de nós</span>
-          </h2>
-          <p style={{ color:'var(--text2)', marginTop:'1rem' }}>
-            Resultados reais de empresas reais. Não vendemos promessas — entregamos transformações.
-          </p>
+        <div className="section-header reveal">
+          <span className="section-tag">Confiança</span>
+          <h2 className="h-lg">Clientes valorizam quando tecnologia fala a língua do negócio.</h2>
         </div>
 
-        <div className="test-grid">
-          {testimonials.map((t, i) => (
-            <div className={`test-card reveal d${(i % 3) + 1}`} key={t.name}>
-              <div className="test-stars">
-                {[1,2,3,4,5].map(s => <i key={s} className="fas fa-star"></i>)}
+        <div className="testimonial-grid">
+          {testimonials.map((testimonial, index) => (
+            <article className={`testimonial-card reveal d${index + 1}`} key={testimonial.name}>
+              <div className="stars" aria-label="5 estrelas">
+                {[1, 2, 3, 4, 5].map((star) => <i key={star} className="fas fa-star" aria-hidden="true" />)}
               </div>
-              <p className="test-text">{t.text}</p>
-              <div className="test-author">
-                <div className="test-avatar">{t.av}</div>
+              <p>“{testimonial.text}”</p>
+              <div className="testimonial-author">
+                <span>{testimonial.initials}</span>
                 <div>
-                  <div className="test-name">{t.name}</div>
-                  <div className="test-role">{t.role}</div>
+                  <strong>{testimonial.name}</strong>
+                  <small>{testimonial.role}</small>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

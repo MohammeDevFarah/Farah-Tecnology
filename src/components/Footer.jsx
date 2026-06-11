@@ -1,25 +1,27 @@
 import { scrollTo } from '../utils/helpers.js'
 
 const socials = [
-  { icon: 'fab fa-instagram',   href: '#' },
-  { icon: 'fab fa-linkedin-in', href: '#' },
-  { icon: 'fab fa-facebook-f',  href: '#' },
-  { icon: 'fab fa-github',      href: '#' },
-  { icon: 'fab fa-whatsapp',    href: 'https://wa.me/5521993936450' },
+  { icon: 'fab fa-instagram', href: '#', label: 'Instagram' },
+  { icon: 'fab fa-linkedin-in', href: '#', label: 'LinkedIn' },
+  { icon: 'fab fa-facebook-f', href: '#', label: 'Facebook' },
+  { icon: 'fab fa-whatsapp', href: 'https://wa.me/5521993936450', label: 'WhatsApp' },
 ]
 
 const navLinks = [
-  ['#sobre',       'Sobre nós'],
-  ['#portfolio',   'Portfólio'],
-  ['#depoimentos', 'Depoimentos'],
-  ['#precos',      'Planos'],
-  ['#faq',         'FAQ'],
-  ['#contato',     'Contato'],
+  ['#sobre', 'Estratégia'],
+  ['#servicos', 'Serviços'],
+  ['#portfolio', 'Projetos'],
+  ['#precos', 'Planos'],
+  ['#faq', 'FAQ'],
+  ['#contato', 'Contato'],
 ]
 
 const services = [
-  'Desenvolvimento Web', 'Aplicações Web', 'Social Media',
-  'Identidade Digital',  'SEO e Performance', 'Consultoria Digital',
+  'Sites profissionais',
+  'Landing pages',
+  'Aplicações web',
+  'Social media',
+  'Identidade digital',
 ]
 
 export default function Footer() {
@@ -27,82 +29,55 @@ export default function Footer() {
     <footer>
       <div className="container">
         <div className="footer-grid">
-
-          {/* Marca */}
           <div className="footer-brand">
-            <a href="#" onClick={e => { e.preventDefault(); scrollTo('#inicio') }}>
-              <div className="logo-wrap logo-wrap-lg">
-                <img src="/Logotipo.png" alt="FarahTechnology Solutions" />
-              </div>
+            <a href="#inicio" onClick={(e) => { e.preventDefault(); scrollTo('#inicio') }}>
+              <img src="/Logotipo.png" alt="FarahTechnology Solutions" />
             </a>
             <p>
-              Transformando negócios através da tecnologia. Desenvolvemos a presença
-              digital que a sua empresa merece.
+              Design, tecnologia e presença digital para empresas que querem competir
+              com mais clareza, confiança e consistência.
             </p>
             <div className="social-links">
-              {socials.map(s => (
-                <a
-                  key={s.icon}
-                  href={s.href}
-                  className="soc-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className={s.icon}></i>
+              {socials.map((social) => (
+                <a key={social.label} href={social.href} aria-label={social.label} target="_blank" rel="noopener noreferrer">
+                  <i className={social.icon} aria-hidden="true" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Serviços */}
           <div className="footer-col">
             <h4>Serviços</h4>
-            <div className="footer-links">
-              {services.map(s => (
-                <a key={s} href="#servicos" onClick={e => { e.preventDefault(); scrollTo('#servicos') }}>
-                  {s}
-                </a>
-              ))}
-            </div>
+            {services.map((service) => (
+              <a key={service} href="#servicos" onClick={(e) => { e.preventDefault(); scrollTo('#servicos') }}>
+                {service}
+              </a>
+            ))}
           </div>
 
-          {/* Empresa */}
           <div className="footer-col">
-            <h4>Empresa</h4>
-            <div className="footer-links">
-              {navLinks.map(([href, label]) => (
-                <a key={href} href={href} onClick={e => { e.preventDefault(); scrollTo(href) }}>
-                  {label}
-                </a>
-              ))}
-            </div>
+            <h4>Mapa</h4>
+            {navLinks.map(([href, label]) => (
+              <a key={href} href={href} onClick={(e) => { e.preventDefault(); scrollTo(href) }}>
+                {label}
+              </a>
+            ))}
           </div>
 
-          {/* Contato */}
           <div className="footer-col">
             <h4>Contato</h4>
-            <div className="footer-links">
-              <a href="mailto:ricardfarah1983@gmail.com">ricardfarah1983@gmail.com</a>
-              <a href="https://wa.me/5521993936450" target="_blank" rel="noopener noreferrer">
-                +55 (21) 99393-6450
-              </a>
-              <span style={{ color: 'var(--text3)', cursor: 'default' }}>Rio de Janeiro, Brasil</span>
-              <span style={{ color: 'var(--text3)', cursor: 'default' }}>Atendimento nacional</span>
-            </div>
+            <a href="mailto:ricardfarah1983@gmail.com">ricardfarah1983@gmail.com</a>
+            <a href="https://wa.me/5521993936450" target="_blank" rel="noopener noreferrer">
+              +55 (21) 99393-6450
+            </a>
+            <span>Rio de Janeiro, Brasil</span>
+            <span>Atendimento nacional</span>
           </div>
-
         </div>
 
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} FarahTechnology Solutions. Todos os direitos reservados.</span>
-          <span>
-            Desenvolvido com{' '}
-            <i className="fas fa-heart" style={{ color: '#FF4D4D', margin: '0 .25rem' }}></i>
-            pela{' '}
-            <a href="#inicio" onClick={e => { e.preventDefault(); scrollTo('#inicio') }}>
-              FarahTechnology
-            </a>
-          </span>
+          <span>© {new Date().getFullYear()} FarahTechnology Solutions.</span>
+          <span>Construído pela FarahTechnology.</span>
         </div>
       </div>
     </footer>

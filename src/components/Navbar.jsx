@@ -1,80 +1,76 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { scrollTo } from '../utils/helpers.js'
 
 const links = [
-  ['#sobre',       'Sobre'],
-  ['#servicos',    'Serviços'],
-  ['#portfolio',   'Portfólio'],
-  ['#depoimentos', 'Depoimentos'],
-  ['#faq',         'FAQ'],
-  ['#contato',     'Contato'],
+  ['#sobre', 'Estratégia'],
+  ['#servicos', 'Serviços'],
+  ['#portfolio', 'Projetos'],
+  ['#precos', 'Planos'],
+  ['#faq', 'FAQ'],
+  ['#contato', 'Contato'],
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [mob,      setMob]      = useState(false)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const go = (href) => { scrollTo(href); setMob(false) }
+  const go = (href) => {
+    scrollTo(href)
+    setOpen(false)
+  }
 
   return (
     <>
-      <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
+      <nav className={`nav${scrolled ? ' scrolled' : ''}`} aria-label="Navegação principal">
         <div className="nav-inner">
-
-          {/* Logotipo com container que integra o fundo branco ao dark theme */}
-          <a href="#" onClick={e => { e.preventDefault(); go('#inicio') }}>
-            <div className="logo-wrap">
+          <a className="brand-link" href="#inicio" onClick={(e) => { e.preventDefault(); go('#inicio') }}>
+            <span className="brand-mark">
               <img src="/Logotipo.png" alt="FarahTechnology Solutions" />
-            </div>
+            </span>
+            <span className="brand-name">FarahTechnology</span>
           </a>
 
           <ul className="nav-links">
             {links.map(([href, label]) => (
               <li key={href}>
-                <a href={href} onClick={e => { e.preventDefault(); go(href) }}>{label}</a>
+                <a href={href} onClick={(e) => { e.preventDefault(); go(href) }}>{label}</a>
               </li>
             ))}
           </ul>
 
-          <div className="nav-cta">
-            <a
-              href="#contato"
-              className="btn btn-primary"
-              onClick={e => { e.preventDefault(); go('#contato') }}
-            >
-              <i className="fas fa-paper-plane"></i> Solicitar Proposta
+          <div className="nav-actions">
+            <a className="btn btn-primary" href="#contato" onClick={(e) => { e.preventDefault(); go('#contato') }}>
+              <i className="fas fa-paper-plane" aria-hidden="true" />
+              Solicitar proposta
             </a>
             <button
-              className="hamburger"
-              aria-label="Menu"
-              onClick={() => setMob(v => !v)}
+              className={`hamburger${open ? ' open' : ''}`}
+              type="button"
+              aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+              aria-expanded={open}
+              onClick={() => setOpen((value) => !value)}
             >
-              <span style={{ transform: mob ? 'rotate(45deg) translate(5px,5px)'   : 'none' }} />
-              <span style={{ opacity: mob ? 0 : 1 }} />
-              <span style={{ transform: mob ? 'rotate(-45deg) translate(5px,-5px)' : 'none' }} />
+              <span />
+              <span />
+              <span />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Menu mobile */}
-      <div className={`mob-menu${mob ? ' open' : ''}`}>
+      <div className={`mobile-menu${open ? ' open' : ''}`}>
         {links.map(([href, label]) => (
-          <a key={href} href={href} onClick={e => { e.preventDefault(); go(href) }}>{label}</a>
+          <a key={href} href={href} onClick={(e) => { e.preventDefault(); go(href) }}>{label}</a>
         ))}
-        <a
-          href="#contato"
-          className="btn btn-primary"
-          style={{ marginTop: '0.5rem' }}
-          onClick={e => { e.preventDefault(); go('#contato') }}
-        >
-          Solicitar Proposta
+        <a className="btn btn-primary btn-full" href="#contato" onClick={(e) => { e.preventDefault(); go('#contato') }}>
+          Solicitar proposta
         </a>
       </div>
     </>

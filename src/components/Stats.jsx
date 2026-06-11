@@ -1,31 +1,20 @@
-import useInView    from '../hooks/useInView.js'
-import useCountUp   from '../hooks/useCountUp.js'
-
 const items = [
-  { num: 150, suffix: '+',  label: 'Projetos Entregues'   },
-  { num: 98,  suffix: '%',  label: 'Clientes Satisfeitos'  },
-  { num: 5,   suffix: '+',  label: 'Anos de Experiência'   },
-  { num: 24,  suffix: '/7', label: 'Suporte Disponível'    },
+  { value: '150+', label: 'entregas digitais' },
+  { value: '98%', label: 'aprovação média' },
+  { value: '5+', label: 'anos de experiência' },
+  { value: '24', label: 'horas para primeiro retorno' },
 ]
-
-function StatCard({ num, suffix, label, delay }) {
-  const [ref, inView] = useInView()
-  const count = useCountUp(num, 2000, inView)
-  return (
-    <div className="stat-card reveal" ref={ref} style={{ transitionDelay: `${delay}s` }}>
-      <div className="stat-num">{count}{suffix}</div>
-      <div className="stat-label">{label}</div>
-    </div>
-  )
-}
 
 export default function Stats() {
   return (
-    <section className="stats">
+    <section className="stats" aria-label="Indicadores da FarahTechnology">
       <div className="container">
         <div className="stats-grid">
-          {items.map((item, i) => (
-            <StatCard key={item.label} {...item} delay={i * 0.08} />
+          {items.map((item) => (
+            <div className="stat-card" key={item.label}>
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </div>
           ))}
         </div>
       </div>

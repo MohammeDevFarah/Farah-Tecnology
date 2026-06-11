@@ -1,18 +1,23 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 /**
- * Dispara `inView = true` uma única vez quando o elemento
- * entra na viewport (IntersectionObserver).
+ * Dispara `inView = true` uma unica vez quando o elemento entra na viewport.
  */
 export default function useInView(threshold = 0.12) {
-  const ref    = useRef(null)
+  const ref = useRef(null)
   const [inView, setInView] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect() } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          observer.disconnect()
+        }
+      },
       { threshold }
     )
+
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
   }, [threshold])

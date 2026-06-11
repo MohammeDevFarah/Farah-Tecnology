@@ -7,5 +7,5 @@ export default defineConfig({
     vue({ include: [/\.vue$/] }),
     react(),
   ],
-  publicDir: 'Img', // Serve Img/ como arquivos estáticos → /Favicon.png, /Logotipo.png
+  publicDir: 'Img', // Serve Img/ como arquivos estaticos em /Favicon.png e /Logotipo.png
 })
